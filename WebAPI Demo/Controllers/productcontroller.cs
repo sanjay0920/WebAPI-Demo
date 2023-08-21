@@ -24,7 +24,6 @@ namespace WebAPI_Demo.Controllers
                 {
                     products.Add(product);
                     _iservice.InsertRecords(product);
-                    //BackgroundJob.Enqueue<Iservice>(x => x.SendEmail());
                     return CreatedAtAction("GetProduct", new { product.id }, product);
                 }
                 return BadRequest();
@@ -38,9 +37,10 @@ namespace WebAPI_Demo.Controllers
                 var product1 = products.FirstOrDefault(x => x.id == id);
                 if (product == null)
                     return NotFound();
-                //BackgroundJob.Enqueue<Iservice>(x => x.SyncData());
                 return Ok(product);
             }
+
+        
 
         }
     }
