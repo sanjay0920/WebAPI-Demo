@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using WebAPI_Demo.Models;
 using WebAPI_Demo.Services;
+using AutoMapper;
 
 namespace WebAPI_Demo.Controllers
 {
@@ -9,12 +10,15 @@ namespace WebAPI_Demo.Controllers
         [ApiController]
         public class productcontroller : ControllerBase
         {
+        private readonly IMapper _mapper;
+       
             public static List<product> products = new List<product>();
             private readonly Iservice _iservice;
 
-            public productcontroller(Iservice iservice)
+            public productcontroller(Iservice iservice, IMapper mapper)
             {
                 _iservice = iservice;
+                 _mapper = mapper;
             }
 
             [HttpPost]
@@ -33,14 +37,18 @@ namespace WebAPI_Demo.Controllers
             public IActionResult GetProduct(int id)
             {
                 var product = _iservice.GetAllRecords();
+       
+               
+           
 
                 var product1 = products.FirstOrDefault(x => x.id == id);
-                if (product == null)
+            var product2 = _mapper.Map<ProductModel>(product1);
+            if (product == null)
                     return NotFound();
-                return Ok(product);
+                return Ok(product2);
             }
 
-        
+       
 
         }
     }
