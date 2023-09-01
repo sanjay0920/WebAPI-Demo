@@ -22,13 +22,18 @@ namespace WebAPI_Demo.Controllers
             }
 
             [HttpPost]
-            public IActionResult Addproduct(product product)
+            public IActionResult Addproduct(ProductModel product)
             {
+
+            var t = _mapper.Map<product>(product);
+            Random r = new Random();
+            t.id = r.Next();
+     
                 if (ModelState.IsValid)
                 {
-                    products.Add(product);
-                    _iservice.InsertRecords(product);
-                    return CreatedAtAction("GetProduct", new { product.id }, product);
+                    //products.Add(t);
+                    _iservice.InsertRecords(t);
+                    return CreatedAtAction("GetProduct", new { t.id }, t);
                 }
                 return BadRequest();
             }

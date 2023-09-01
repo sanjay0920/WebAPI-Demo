@@ -6,7 +6,7 @@ namespace WebAPI_Demo
     public class AutoMapperProfile:Profile
     {
         public AutoMapperProfile() {
-            CreateMap<product,ProductModel>();
+            CreateMap<product,ProductModel>().ReverseMap();
         }
     }
 }
