@@ -2,6 +2,7 @@
 using WebAPI_Demo.Models;
 using WebAPI_Demo.Services;
 using AutoMapper;
+using Autofac;
 
 namespace WebAPI_Demo.Controllers
 {
